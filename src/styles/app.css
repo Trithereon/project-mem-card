@@ -1,1 +1,14 @@
-
+body {
+  background: no-repeat center black url("/src/assets/img/bg-moria.jpg");
+}
+.App {
+  max-width: 1435px;
+}
+h1 {
+  user-select: none;
+  color: #e3b737;
+}
+.title-bar {
+  display: flex;
+  justify-content: space-between;
+}

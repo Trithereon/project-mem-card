@@ -4,7 +4,10 @@ import CardList from "./components/CardList";
 function App() {
   return (
     <div className="App">
-      <h1>Memory Card: Lord of the Rings Edition</h1>
+      <div className="title-bar">
+        <h1>Memory Card Game</h1>
+        <h1>Lord of the Rings Edition</h1>
+      </div>
       <CardList />
     </div>
   );
