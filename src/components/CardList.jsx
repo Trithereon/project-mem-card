@@ -3,6 +3,7 @@ import { secrets } from "../config/secrets.js";
 
 function CardList() {
   const [images, setImages] = useState([]);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     async function fetchImages() {
@@ -37,10 +38,6 @@ function CardList() {
           url: `${secrets.SB_URL}/storage/v1/object/public/${secrets.SB_BUCKET_NAME}/${file.name}`,
         }));
 
-        // Shuffle the array.
-        shuffle(imageList);
-
-        // Update state with shuffled list.
         setImages(imageList);
       } catch (err) {
         console.error(err);
@@ -50,12 +47,18 @@ function CardList() {
     fetchImages();
   }, []);
 
+  // Shuffle the array every time the score changes.
+  useEffect(() => {
+    const shuffledImages = shuffle(images);
+    setImages(shuffledImages);
+  }, [score]);
+
   return (
     <>
       {images.map((img) => {
         return (
           <div key={img.name}>
-            <img src={img.url} alt={img.name} />
+            <img src={img.url} alt={img.name} width={"100px"} />
           </div>
         );
       })}
@@ -63,19 +66,21 @@ function CardList() {
   );
 }
 
-// Using the Fisher-Yates Shuffle.
+// Uses the Fisher-Yates shuffle algorithm.
 function shuffle(arr) {
-  let currentIndex = arr.length;
+  const shuffledArr = [...arr];
+  let currentIndex = shuffledArr.length;
 
   while (currentIndex != 0) {
     let randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
 
-    [arr[currentIndex], arr[randomIndex]] = [
-      arr[randomIndex],
-      arr[currentIndex],
+    [shuffledArr[currentIndex], shuffledArr[randomIndex]] = [
+      shuffledArr[randomIndex],
+      shuffledArr[currentIndex],
     ];
   }
+  return shuffledArr;
 }
 
 export default CardList;
