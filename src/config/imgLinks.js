@@ -1,3 +1,5 @@
+// Could be used as fallback img URLs.
+
 const imgLinks = {
   aragorn: "https://i.ibb.co/Kz6RjGMs/aragorn.webp",
   arwen: "https://i.ibb.co/QFgfXcPX/arwen.webp",

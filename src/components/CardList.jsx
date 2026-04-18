@@ -37,6 +37,10 @@ function CardList() {
           url: `${secrets.SB_URL}/storage/v1/object/public/${secrets.SB_BUCKET_NAME}/${file.name}`,
         }));
 
+        // Shuffle the array.
+        shuffle(imageList);
+
+        // Update state with shuffled list.
         setImages(imageList);
       } catch (err) {
         console.error(err);
@@ -57,6 +61,21 @@ function CardList() {
       })}
     </>
   );
+}
+
+// Using the Fisher-Yates Shuffle.
+function shuffle(arr) {
+  let currentIndex = arr.length;
+
+  while (currentIndex != 0) {
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [arr[currentIndex], arr[randomIndex]] = [
+      arr[randomIndex],
+      arr[currentIndex],
+    ];
+  }
 }
 
 export default CardList;
