@@ -1,5 +1,5 @@
 body {
-  background: no-repeat center black url("/src/assets/img/bg-moria.jpg");
+  background: repeat-x center/50% black url("/src/assets/img/bg-moria.jpg");
 }
 .App {
   max-width: 1435px;
@@ -11,4 +11,16 @@ h1 {
 .title-bar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.instructions {
+  color: rgba(245, 222, 179, 0.534);
+}
+.score-list {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+  color: wheat;
+  min-width: 77px;
 }

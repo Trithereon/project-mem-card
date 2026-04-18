@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { secrets } from "../config/secrets.js";
 import "../styles/cardlist.css";
 
-function CardList() {
+function CardList({ score, onClick }) {
   const [images, setImages] = useState([]);
-  const [score, setScore] = useState(0);
 
   useEffect(() => {
     async function fetchImages() {
@@ -60,8 +59,14 @@ function CardList() {
     <div className="cards">
       {images.map((img) => {
         return (
-          <article className="card">
-            <div key={img.name}>
+          <article
+            className="card"
+            key={img.name}
+            onClick={onClick}
+            role="button"
+            id={img.name}
+          >
+            <div>
               <img src={img.url} alt={img.name} />
             </div>
             <h2>{img.name.charAt(0).toUpperCase() + img.name.slice(1)}</h2>
