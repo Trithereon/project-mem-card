@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { secrets } from "../config/secrets.js";
+import "../styles/cardlist.css";
 
 function CardList() {
   const [images, setImages] = useState([]);
@@ -38,7 +39,9 @@ function CardList() {
           url: `${secrets.SB_URL}/storage/v1/object/public/${secrets.SB_BUCKET_NAME}/${file.name}`,
         }));
 
-        setImages(imageList);
+        const shuffledImageList = shuffle(imageList);
+
+        setImages(shuffledImageList);
       } catch (err) {
         console.error(err);
       }
@@ -54,15 +57,18 @@ function CardList() {
   }, [score]);
 
   return (
-    <>
+    <div className="cards">
       {images.map((img) => {
         return (
-          <div key={img.name}>
-            <img src={img.url} alt={img.name} width={"100px"} />
-          </div>
+          <article className="card">
+            <div key={img.name}>
+              <img src={img.url} alt={img.name} />
+            </div>
+            <h2>{img.name.charAt(0).toUpperCase() + img.name.slice(1)}</h2>
+          </article>
         );
       })}
-    </>
+    </div>
   );
 }
 
