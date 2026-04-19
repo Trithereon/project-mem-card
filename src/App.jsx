@@ -1,8 +1,8 @@
 import "./styles/app.css";
 import CardList from "./components/CardList";
 import { useState } from "react";
-import shire from "./src/assets/img/shire.webp";
-import eye from "./src/assets/img/eye.webp";
+import shire from "./assets/img/shire.webp";
+import eye from "./assets/img/eye.webp";
 
 function App() {
   const [score, setScore] = useState(0);
