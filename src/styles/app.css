@@ -2,6 +2,9 @@ body {
   background: repeat-x center/50% black url("/src/assets/img/bg-moria.jpg");
 }
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   max-width: 1435px;
 }
 h1 {
@@ -15,12 +18,66 @@ h1 {
   gap: 10px;
 }
 .instructions {
-  color: rgba(245, 222, 179, 0.534);
+  color: rgba(245, 222, 179, 0.712);
+  background: rgb(0, 0, 0, 0.8);
+  padding: 6px;
 }
 .score-list {
   list-style-type: none;
-  padding: 0;
+  padding: 4px;
   text-align: left;
   color: wheat;
   min-width: 77px;
+  background: rgb(0, 0, 0, 0.8);
+}
+.game-over-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  animation: flashFade 550ms ease-in forwards;
+  pointer-events: none;
+}
+.victory-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  animation: fadeInOut 3900ms ease-in-out forwards;
+  pointer-events: none;
+}
+
+.victory-text {
+  position: absolute;
+  font-size: 8rem;
+}
+
+@keyframes flashFade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

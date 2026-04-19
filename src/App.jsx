@@ -6,29 +6,37 @@ function App() {
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
+  const [showGameOver, setShowGameOver] = useState(false);
+  const [showVictory, setShowVictory] = useState(false);
 
   const handleClick = (e) => {
     // e.currentTarget points to the element with the onClick function.
-    // In this case: article.
-    console.log(e.currentTarget.id);
-    /*
-     Game logic:
-     1. If clickedCards has target card id, reset score to 0. Game Over.
-     2. If clickedCards does not have target card id:
-        1. score++
-            1. If score > best, best = score.
-            2. If score === 12, display victory alert or modal.
-        2. Add target card id to clickedCards array.
-    */
+    // In this case: article (the card parent element).
     if (clickedCards.includes(e.currentTarget.id)) {
       setScore(0);
       setClickedCards([]);
       // Flash the eye of Sauron! Like a subtle and fast Game Over message.
+      gameOverFlash();
     } else {
       setScore(score + 1);
       setClickedCards([...clickedCards, e.currentTarget.id]);
       score + 1 > best ? setBest(score + 1) : null;
+      if (score + 1 === 12) {
+        setScore(0);
+        setClickedCards([]);
+        victoryFlash();
+      }
     }
+  };
+
+  // duration is in milliseconds
+  const gameOverFlash = (duration = 600) => {
+    setShowGameOver(true);
+    setTimeout(() => setShowGameOver(false), duration);
+  };
+  const victoryFlash = (duration = 4000) => {
+    setShowVictory(true);
+    setTimeout(() => setShowVictory(false), duration);
   };
 
   return (
@@ -45,6 +53,17 @@ function App() {
         <h1>Lord of the Rings Edition</h1>
       </div>
       <CardList score={score} onClick={handleClick} />
+      {showGameOver && (
+        <div className="game-over-splash">
+          <img src="./src/assets/img/eye.webp" alt="eye" />
+        </div>
+      )}
+      {showVictory && (
+        <div className="victory-splash">
+          <span className="victory-text">VICTORY</span>
+          <img src="./src/assets/img/shire.webp" alt="shire" />
+        </div>
+      )}
     </div>
   );
 }
