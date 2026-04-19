@@ -1,6 +1,8 @@
 import "./styles/app.css";
 import CardList from "./components/CardList";
 import { useState } from "react";
+import shire from "./src/assets/img/shire.webp";
+import eye from "./src/assets/img/eye.webp";
 
 function App() {
   const [score, setScore] = useState(0);
@@ -55,13 +57,13 @@ function App() {
       <CardList score={score} onClick={handleClick} />
       {showGameOver && (
         <div className="game-over-splash">
-          <img src="./src/assets/img/eye.webp" alt="eye" />
+          <img src={eye} alt="eye" />
         </div>
       )}
       {showVictory && (
         <div className="victory-splash">
           <span className="victory-text">VICTORY</span>
-          <img src="./src/assets/img/shire.webp" alt="shire" />
+          <img src={shire} alt="shire" />
         </div>
       )}
     </div>
