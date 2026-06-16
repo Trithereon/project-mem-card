@@ -36,7 +36,7 @@ function App() {
     setShowGameOver(true);
     setTimeout(() => setShowGameOver(false), duration);
   };
-  const victoryFlash = (duration = 4000) => {
+  const victoryFlash = (duration = 12000) => {
     setShowVictory(true);
     setTimeout(() => setShowVictory(false), duration);
   };
