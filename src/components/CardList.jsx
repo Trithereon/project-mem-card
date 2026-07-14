@@ -4,9 +4,11 @@ import "../styles/cardlist.css";
 
 function CardList({ score, onClick }) {
   const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchImages() {
+      setIsLoading(true);
       try {
         // Images are in a supabase bucket, which requires POST for the "list" endpoint.
         const response = await fetch(
@@ -41,6 +43,7 @@ function CardList({ score, onClick }) {
         const shuffledImageList = shuffle(imageList);
 
         setImages(shuffledImageList);
+        setIsLoading(false);
       } catch (err) {
         console.error(err);
       }
@@ -57,22 +60,26 @@ function CardList({ score, onClick }) {
 
   return (
     <div className="cards">
-      {images.map((img) => {
-        return (
-          <article
-            className="card"
-            key={img.name}
-            onClick={onClick}
-            role="button"
-            id={img.name}
-          >
-            <div>
-              <img src={img.url} alt={img.name} />
-            </div>
-            <h2>{img.name.charAt(0).toUpperCase() + img.name.slice(1)}</h2>
-          </article>
-        );
-      })}
+      {isLoading ? (
+        <span className="loading">Loading...</span>
+      ) : (
+        images.map((img) => {
+          return (
+            <article
+              className="card"
+              key={img.name}
+              onClick={onClick}
+              role="button"
+              id={img.name}
+            >
+              <div>
+                <img src={img.url} alt={img.name} />
+              </div>
+              <h2>{img.name.charAt(0).toUpperCase() + img.name.slice(1)}</h2>
+            </article>
+          );
+        })
+      )}
     </div>
   );
 }

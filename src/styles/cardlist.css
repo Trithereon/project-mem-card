@@ -33,3 +33,17 @@ h2 {
     box-shadow,
     transform 300ms;
 }
+
+.loading {
+  font-size: 32px;
+  animation: 500ms sway infinite alternate;
+}
+
+@keyframes sway {
+  from {
+    font-size: 24px;
+  }
+  to {
+    font-size: 32px;
+  }
+}
