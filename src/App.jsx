@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="App">
       <div className="title-bar">
-        <h1>Memory Card Game</h1>
+        <h1 className="title">Memory Card Game</h1>
         <span className="instructions">
           Click on all 12 images, but only once each!
         </span>
@@ -52,7 +52,7 @@ function App() {
           <li>{"Score: " + score}</li>
           <li>{"Best: " + best}</li>
         </ul>
-        <h1>Lord of the Rings Edition</h1>
+        <h1 className="subtitle">Lord of the Rings Edition</h1>
       </div>
       <CardList score={score} onClick={handleClick} />
       {showGameOver && (
